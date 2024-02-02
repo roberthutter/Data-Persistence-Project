@@ -33,6 +33,11 @@ public class UI_Menu_Manager : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene(3);
+    }
+
     public void ResetScores()
     {
         DataHandler.Instance.highScorePlayer = null;
