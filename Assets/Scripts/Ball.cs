@@ -6,12 +6,20 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private Rigidbody m_Rigidbody;
-    private float accel = SettingsManager.ballAccel;
-    private float max = SettingsManager.maxballSpeed;
+    private float accel = DataHandler.Instance.ballAccel;
+    private float max = DataHandler.Instance.maxballSpeed;
 
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
+        if (accel == 0.0f)
+        {
+            accel = 0.01f;
+        }
+        if (max == 0.0f)
+        {
+            max = 3.0f;
+        }
     }
     
     private void OnCollisionExit(Collision other)

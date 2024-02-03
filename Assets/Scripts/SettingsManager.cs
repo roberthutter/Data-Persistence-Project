@@ -8,27 +8,18 @@ public class SettingsManager : MonoBehaviour
 {
 
     public Dropdown dropDown;
+    public int dValue;
 
-    public static float ballAccel;
-    public static float maxballSpeed;
-
-    public void SetDifficulty()
+    void Start()
     {
-        if (dropDown.value == 0)
-        {
-            ballAccel = 0.01f;
-            maxballSpeed = 3.0f;
-        }
-        else if (dropDown.value == 1)
-        {
-            ballAccel = 0.02f;
-            maxballSpeed = 4.0f;
-        }
-        else if (dropDown.value == 2)
-        {
-            ballAccel = 0.03f;
-            maxballSpeed = 5.0f;
-        }
+        dropDown.value = DataHandler.Instance.setValue;
+    }
+
+    public void GetDifficulty()
+    {
+        dValue = dropDown.value;
+        DataHandler.Instance.setValue = dValue;
+        DataHandler.Instance.SetDifficulty(dValue);
     }
 
     public void BacktoMenu()

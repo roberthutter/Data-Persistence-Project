@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class DataHandler : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class DataHandler : MonoBehaviour
 
     public int highScore;
     public string highScorePlayer;
+    public int setValue;
+    public float ballAccel;
+    public float maxballSpeed;
 
     [System.Serializable]
     public class TopScore
@@ -20,7 +24,6 @@ public class DataHandler : MonoBehaviour
     }
 
     public static List<TopScore> topScores = new List<TopScore>();
-    
 
     private void Awake()
     {
@@ -32,12 +35,14 @@ public class DataHandler : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         LoadData();
+        SetDifficulty(setValue);
     }
 
     [System.Serializable]
     class SaveData
     {
         public int highScore;
+        public int setValue;
         public string highScorePlayer;
         public List<TopScore> highScores;
     }
@@ -46,6 +51,7 @@ public class DataHandler : MonoBehaviour
     {
         SaveData data = new SaveData();
         data.highScore = highScore;
+        data.setValue = setValue;
         data.highScorePlayer = highScorePlayer;
         data.highScores = topScores;
 
@@ -63,6 +69,7 @@ public class DataHandler : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             highScore = data.highScore;
+            setValue = data.setValue;
             highScorePlayer = data.highScorePlayer;
 
             if (data.highScores != null)
@@ -70,6 +77,25 @@ public class DataHandler : MonoBehaviour
                 topScores = data.highScores;
             }
 
+        }
+    }
+
+    public void SetDifficulty(int sValue)
+    {
+        if (sValue == 0)
+        {
+            ballAccel = 0.01f;
+            maxballSpeed = 3.0f;
+        }
+        else if (sValue == 1)
+        {
+            ballAccel = 0.02f;
+            maxballSpeed = 4.0f;
+        }
+        else if (sValue == 2)
+        {
+            ballAccel = 0.03f;
+            maxballSpeed = 5.0f;
         }
     }
 }
