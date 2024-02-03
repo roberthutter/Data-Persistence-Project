@@ -20,6 +20,7 @@ public class UI_Menu_Manager : MonoBehaviour
     void Start()
     {
         bestScoreText.text = "Best Score: " + DataHandler.Instance.highScorePlayer + ": " + DataHandler.Instance.highScore;
+        nameField.text = DataHandler.Instance.highScorePlayer;
     }
 
     public void StartNew()

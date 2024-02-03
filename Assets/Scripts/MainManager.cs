@@ -69,7 +69,7 @@ public class MainManager : MonoBehaviour
     void AddPoint(int point)
     {
         m_Points += point;
-        ScoreText.text = $"Score : {m_Points}";
+        ScoreText.text = "Score : " + UI_Menu_Manager.playerName + ": " + m_Points;
         if (m_Points > DataHandler.Instance.highScore)
         {
             DataHandler.Instance.highScore = m_Points;
